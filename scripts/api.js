@@ -15,9 +15,20 @@ const api = function() {
             success: callback
         }) 
     }
+    const updateItem = function(id, updateData, callback){
+        console.log(`updateItem ran`);
+        $.ajax({
+            url: BASE_URL + '/items/' + id,
+            method: 'PATCH',
+            contentType: 'application/json',
+            data: JSON.stringify(updateData),
+            success: callback
+        })
+    }
     return {
         getItems: getItems,
-        createItem: createItem
+        createItem: createItem,
+        updateItem: updateItem
     }
 }();
 

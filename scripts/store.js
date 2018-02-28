@@ -24,10 +24,14 @@ const store = (function(){
 
   const findAndDelete = function(id) {
     //this.items = this.items.filter(item => item.id !== id);
+
     let item = this.items.find(item => item.id == id);
-    let itemIndex = this.items.indexOf(item);
-    let newList = item.splice(itemIndex);
-    
+    let itemIndex = this.items.indexOf(item); 
+    let newList = store.items.filter(function(x){
+      return x !== item;
+    });
+    store.items = newList;
+    console.log(newList);
   };
 
   // const findAndUpdateName = function(id, name) {

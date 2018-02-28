@@ -5,7 +5,7 @@ const shoppingList = (function(){
 
   function generateItemElement(item) {
     let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
-    if (!item.checked) {
+    if (item.checked === true) {
       itemTitle = `
         <form id="js-edit-item">
           <input class="shopping-item type="text" value="${item.name}" />
@@ -76,9 +76,11 @@ const shoppingList = (function(){
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      const item = store.findById(id);
-      api.updateItem(id, { checked: !item.checked }, () => {
-      store.findAndUpdate(id, { checked: !item.checked });
+      const item = store.items.find(item => item.id == id);
+      console.log(item.checked);
+      //api.updateItem(id, item.checked)
+      api.updateItem(id, { checked: item.checked }, () => {
+      store.findAndCheck(id);
       render();
     });
       // store.findAndToggleChecked(id);
@@ -103,13 +105,13 @@ const shoppingList = (function(){
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       console.log(id);
-      const itemName = $(event.currentTarget).find('.shopping-item').val();
-      console.log(itemName);
-      let testObj = { name: 'kiwi'}
-      api.updateItem(id, testObj, () => {
-        store.findAndUpdate(id, testObj);
+      const newName = $(event.currentTarget).find('.shopping-item').val();
+      api.updateItem(id, { name: newName }, () => {
+        store.findAndUpdate(id, { name: newName });
         render();
       });
+      
+     
     });
   }
   

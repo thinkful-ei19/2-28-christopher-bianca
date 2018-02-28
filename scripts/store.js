@@ -23,7 +23,11 @@ const store = (function(){
   // };
 
   const findAndDelete = function(id) {
-    this.items = this.items.filter(item => item.id !== id);
+    //this.items = this.items.filter(item => item.id !== id);
+    let item = this.items.find(item => item.id == id);
+    let itemIndex = this.items.indexOf(item);
+    let newList = item.splice(itemIndex);
+    
   };
 
   // const findAndUpdateName = function(id, name) {
@@ -40,7 +44,17 @@ const store = (function(){
     //let item = this.findById('cje7elhry00280k3mrljhz79o');
     let item = this.items.find(item => item.id == id);
     item.name = newData.name;
+  
   }
+  const findAndCheck = function(id){
+    let item = this.items.find(item => item.id == id);
+    if(item.checked === false){
+      item.checked = true;
+    }else {
+      item.checked = false;
+    }
+  }
+
 
   const toggleCheckedFilter = function() {
     this.hideCheckedItems = !this.hideCheckedItems;
@@ -63,6 +77,7 @@ const store = (function(){
     // findAndUpdateName,
     toggleCheckedFilter,
     setSearchTerm,
+    findAndCheck
   };
   
 }());

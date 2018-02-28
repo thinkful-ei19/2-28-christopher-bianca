@@ -7,9 +7,10 @@ const Item = (function(){
     if (!name) throw new TypeError('Name must not be blank');
   };
 
-  const create = function(name) {
+  const create = function(name, id=cuid()) {
+    
     return {
-      id: cuid(),
+      id: id,
       name,
       checked: false
     };

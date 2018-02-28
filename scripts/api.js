@@ -6,7 +6,7 @@ const api = function() {
     }
     const createItem = function(name, callback) {
         console.log('createItem ran');
-        const newItem = JSON.stringify({name: name});
+        const newItem = JSON.stringify({name});
         $.ajax({
             url: BASE_URL + '/items',
             method: 'POST',
@@ -26,9 +26,8 @@ const api = function() {
         })
     }
     return {
-        getItems: getItems,
-        createItem: createItem,
-        updateItem: updateItem
+        getItems,
+        createItem,
+        updateItem
     }
 }();
-
